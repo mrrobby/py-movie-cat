@@ -1,12 +1,15 @@
-Flask App.  Here's the setup
+#Demo Movie App
+This is designed to take two urls and concatinate them, then save it to the local assets directory.
+
+This is a Flask Api App.  Here's the setup
 
 First make sure you have python3.6 install (see homebrew install if not), 
 ```
 $ brew update
 $ brew install python
 ```
-or for more (info)[http://docs.python-guide.org/en/latest/starting/install3/osx/]
-https://gist.github.com/alyssaq/f60393545173379e0f3f
+or for more [info here](http://docs.python-guide.org/en/latest/starting/install3/osx/)
+[or here](https://gist.github.com/alyssaq/f60393545173379e0f3f)
 
 Check if `pip` is installed:
 ```
@@ -81,13 +84,24 @@ Authorization JWT the.jwt.token
 
 Create two more requests adding the token at the following endpoints:
 ```
-GET /videomagic
-GET /status/<task-id>
+POST /videomagic
+HTTP/1.1
+Host: localhost:5000
+Content-Type: application/json
+Authorization JTW the.token.here
+{
+	"file1": "http://address1.mp4",
+	"file2": "http://address2.mp4"
+}
 ```
 
-We'll convert the first to POST later. 
+then the bookmark URL will be
+```
+GET /status/<task-id>
+Authorization JTW the.token.here
 
-
+```
+this will be returned as the response from videomagic.
 
 
 

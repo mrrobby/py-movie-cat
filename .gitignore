@@ -23,4 +23,5 @@ htmlcov/
 
 venv/
 
-assets/
+*.mp4
+README.html
