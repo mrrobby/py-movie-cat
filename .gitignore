@@ -22,3 +22,6 @@ htmlcov/
 *,cover
 
 venv/
+
+*.mp4
+README.html
