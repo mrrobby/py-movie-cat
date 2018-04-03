@@ -16,21 +16,25 @@ jwt = JWT(app, authenticate, identity)
 # not going to use SQLAlchemy, but would if we need an ORM
 #db = SQLAlchemy(app)
 
-@app.route('/pinghs256')
+@app.route('/pinghs256', methods=['GET'])
 @jwt_required()
 def pinghs256():
     """" Sanity Check Route """
     return 'current identity: {}'.format(current_identity.username)
 
 
-@app.route('/videomagic')
+@app.route('/videomagic', methods=['POST'])
 @jwt_required()
 def videomagic():
-    # More likely this would publish the job to another service via RabbitMQ, Kafka, Redis, etc...
+    """Endpoint to post two URLs (use http) and start job to concat together"""
+    data = request.get_json()
+    file1 = data["file1"]
+    file2 = data["file2"]
+
     result = concat_video_files.apply_async(args=[
-      'assets/SnowboardArchivesVideo1.mp4',
-      'assets/VailDreamVideo1.mp4',
-      'assets/FinalVailVideo.mp4']
+      file1,
+      file2,
+      'assets/FinalVideo.mp4']
     )
 
     return jsonify({'Location': url_for('taskstatus', task_id=result.id)}), 202
