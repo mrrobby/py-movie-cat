@@ -61,3 +61,14 @@ Authorization JWT the.jwt.token
 ```
 
 
+
+
+
+
+Libraries:
+- Flask-JWT: https://pythonhosted.org/Flask-JWT/
+- Flask: 
+- Moviepy: https://pypi.python.org/pypi/moviepy
+- Numpy
+- Their dependencies (run pip list to see)
+
