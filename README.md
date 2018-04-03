@@ -43,8 +43,9 @@ $ brew services start redis
 
 Start redis now. We are assuming it starts on the default port `6379`.
 
-Start the celery worker. This handles queuing jobs in redis. It will print log info so you can monitor
+Open another terminal window and navigate to the project directory. Start `venv` and then start the celery worker. This handles queuing jobs in redis. It will print log info so you can monitor
 ```
+$ source venv/bin/activate
 $ celery -A video_tools.celery worker --loglevel=info
 ```
 
@@ -84,11 +85,11 @@ Authorization JWT the.jwt.token
 
 Create two more requests adding the token at the following endpoints:
 ```
-POST /videomagic
-HTTP/1.1
+POST /videomagic HTTP/1.1
 Host: localhost:5000
 Content-Type: application/json
-Authorization JTW the.token.here
+Authorization JWT the.token.here
+
 {
 	"file1": "http://address1.mp4",
 	"file2": "http://address2.mp4"
@@ -97,7 +98,8 @@ Authorization JTW the.token.here
 
 then the bookmark URL will be
 ```
-GET /status/<task-id>
+GET /status/<task-id> HTTP/1.1
+Host: localhost:5000
 Authorization JTW the.token.here
 
 ```
